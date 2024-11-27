@@ -1,0 +1,458 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background: url(bg.jpg) no-repeat;
+    background-size: cover;
+}
+
+.nav {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    z-index: 3;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 94%;
+    font-size: 14px;
+}
+
+.nav span:nth-child(2) {
+    color: green;
+    font-weight: bold;
+}
+
+button.go-home {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+canvas#gamecanvas {
+    width: 800px;
+    height: 700px;
+    position: relative;
+    margin-top: 34px;
+}
+
+.bg {
+    display: flex;
+    width: 949px;
+    height: 743px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.bg::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(tablet.png) no-repeat;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.sidebar {
+    width: 113px;
+    height: 685px;
+    z-index: 4;
+    padding-left: 27px;
+    margin-top: 34px;
+}
+
+.sidebar button {
+    background: none;
+    width: 80px;
+    display: flex;
+    font-family: monospace;
+    color: white;
+    font-size: 16px;
+    position: relative;
+    height: 75px;
+    margin-bottom: 8px;
+    align-items: flex-end;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar button::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: -14px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    /* transition: background-size .3s; */
+}
+
+.sidebar button.active {
+    color: #fff181;
+    font-weight: bold;
+}
+
+.sidebar button:hover::after {
+    background-size: 110%;
+}
+
+.sidebar button#startBtn {
+    opacity: .5;
+    pointer-events: none;
+    transition: opacity .3s;
+    margin-bottom: 1px;
+    margin-top: 21px;
+}
+
+.sidebar button#startBtn::after {
+    background-image: url(start.png);
+    background-size: 200px 100px;
+    background-position: -12px -7px;
+}
+
+.sidebar button#startBtn.active::after {
+    animation: sprite-animation .5s steps(2) infinite;
+}
+
+@keyframes sprite-animation {
+    from {
+        background-position: -12px -7px; /* Start at the first cell */
+    }
+    to {
+        background-position: -215px -7px; /* Move to the second cell */
+    }
+}
+
+.sidebar button#trashBtn::after {
+    background-image: url(trash.png);
+}
+
+.sidebar button#resetBtn::after {
+    background-image: url(reset.png);
+}
+
+.sidebar button#pathToolBtn::after {
+    background-image: url(pathtool.png);
+}
+
+.sidebar button#eraserToolBtn::after {
+    background-image: url(erasertool.png);
+}
+
+.sidebar button#portalToolBtn::after {
+    background-image: url(portal.png);
+}
+
+.sidebar button#springToolBtn::after {
+    background-image: url(spring.png);
+}
+
+.sidebar button#helpBtn::after {
+    background-image: url(help.png);
+}
+
+.dialog {
+    position: absolute;
+    width: 915px;
+    height: 693px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    margin-bottom: 14px;
+}
+
+.dialog-content {
+    background: white;
+    border-radius: 20px;
+    padding: 5ch 3ch 2ch;
+}
+
+.dialog-content button {
+    background: #f1f1f1;
+    border: none;
+    padding: 2ch 3ch;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 1ch;
+}
+
+.hidden {
+    display: none!important;
+}
+
+.dialog.youwin .dialog-content {
+    background: white;
+    border-radius: 20px;
+    padding: 3ch 3ch 2ch;
+    width: 800px;
+    height: 550px;
+    position: relative;
+}
+
+.dialog.help,
+.dialog.youwin,
+.dialog.error {
+    position: absolute;
+    width: 915px;
+    height: 708px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    margin-bottom: 1px;
+}
+
+.dialog.error .dialog-content {
+    width: 400px;
+    background: #7b0404;
+    color: white;
+}
+
+.dialog.error .dialog-content h2 {
+    text-align: center;
+}
+
+.dialog.milestone {
+    z-index: 7;
+}
+
+.dialog.milestone .dialog-content {
+    width: 480px;
+}
+
+.dialog.milestone .dialog-content h2 {
+    text-align: center;
+}
+
+
+.dialog.help .dialog-content {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 600px;
+    height: 510px;
+}
+
+.dialog.help button.closeBtn {
+    position: absolute;
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    right: 3px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 4px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    text-transform: uppercase;
+    font-size: 11px;
+    top: 2px;
+}
+
+ul.toc {
+    list-style: none;
+    padding: 2ch 4ch 2ch 0;
+    margin: 0;
+    width: 320px;
+}
+
+ul.toc li {
+    margin-bottom: 1ch;
+    cursor: pointer;
+}
+
+ul.toc li.active {
+    font-weight: bold;
+    color: green;
+}
+
+.instructions {
+    margin-top: 1ch;
+}
+
+.instructions ol {
+    margin: 5px 0 0 17px;
+    padding: 0;
+}
+
+ul.toc::before {
+    content: 'Help';
+    font-size: 2em;
+    font-weight: bold;
+    padding-bottom: 1ch;
+    display: block;
+}
+
+.admin-controls {
+    position: absolute;
+    bottom: 0;
+    padding: 2ch;
+    background: #272727;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px black;
+    border: 1px solid #ffffff24;
+    text-align: center;
+    z-index: 5;
+}
+
+.admin-controls fieldset {
+    margin-top: 10px;
+}
+
+.sidebar button#startBtn.ready {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.dialog.youwin .scoreboard table {
+    width: 100%;
+}
+
+.dialog.youwin .scoreboard tr {
+    height: 24px;
+}
+
+.dialog.youwin .scoreboard tr:nth-child(even) {
+    background: #eaf1eb;
+}
+
+.dialog.youwin .scoreboard th, td {
+    text-align: left;
+}
+
+.dialog.logo .dialog-content {
+    background: white;
+    padding: 5ch 3ch 2ch;
+    width: 915px;
+    height: 706px;
+    text-align: center;
+    border-radius: 0px;
+    margin-top: 13px;
+}
+
+.dialog.youwin h1 {
+    text-align: center;
+    color: #9b0000;
+    font-size: 2.75em;
+    margin-top: 2px;
+}
+
+.dialog.youwin button.active {
+    background: #02a317;
+    color: white;
+    font-weight: bold;
+}
+
+.position-text {
+    font-weight: bold;
+    color: green;
+}
+
+.mode-switch {
+    position: absolute;
+    display: flex;
+    width: 350px;
+    flex-direction: row;
+    right: 24px;
+    top: 100px;
+}
+
+.mode-switch button {
+    margin: 3px;
+    padding: 1.5ch;
+}
+
+.button-corral {
+    display: flex;
+    gap: 8px;
+}
+
+.level-list {
+    display: flex;
+    padding: 2ch;
+    height: 220px;
+    gap: 1ch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1ch;
+}
+
+.level-list.completed {
+    padding: 1.95ch;
+}
+
+.level-list .level-item.completed a {
+    background: #addbad;
+}
+
+.level-list .level-item.completed a::before {
+    content: '✓';
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.level-list div:nth-child(13) {
+    display: none;
+}
+
+.level-list div.level-item:nth-child(13) a {
+    color: #ffffff;
+    background: #ff0000;
+    border: 3px solid black;
+}
+
+.level-list.completed div:nth-child(13) {
+    display: block;
+}
+
+.level-item:hover a {
+    color: white;
+    background: green;
+}
+
+.level-item a {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    width: 200px;
+    background: lightgrey;
+    height: 52px;
+    line-height: 52px;
+    border-radius: 8px;
+    display: block;
+    position: relative;
+}
