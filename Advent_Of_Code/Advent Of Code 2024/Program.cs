@@ -3,8 +3,13 @@
 namespace Advent_Of_Code_2024 {
   internal class Program {
     static void Main(string[] args) {
-
       /*
+      Day2 d2 = new Day2();
+      d2.Part1();
+      d2.Part2();
+
+
+      
       Day4 d4 = new Day4();
       d4.Part1();
       d4.Part2();
@@ -34,11 +39,15 @@ namespace Advent_Of_Code_2024 {
 
       Day10 d10 = new Day10();
       d10.Part1();
-      d10.Part2();*/
+      d10.Part2();
 
       Day11 d11 = new Day11();
       d11.Part1();
-      d11.Part2();
+      d11.Part2();   */
+
+      Day12 d12 = new Day12();
+      d12.Part1();
+      d12.Part2();
     }
   }
 }

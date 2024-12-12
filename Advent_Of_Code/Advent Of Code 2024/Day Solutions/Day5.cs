@@ -26,7 +26,6 @@ namespace Advent_Of_Code_2024.Day_Solutions {
       foreach(var s in input.Where(x => x.Contains(',')).ToList()) {
         Updates.Add(s.Split(",").Select(x => int.Parse(x)).ToList());
       }
-      Console.WriteLine("bla");
     }
 
     public override void Part1() {
