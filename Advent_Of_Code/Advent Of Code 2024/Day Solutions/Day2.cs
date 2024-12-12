@@ -79,7 +79,7 @@ namespace Advent_Of_Code_2024.Day_Solutions {
       if(transitions.Count(x => x < 1 || x > 3) == 0)
         return true;
       if(errorIndex != transitions.Count)
-        transitions[errorIndex] += errorTransition;
+        transitions[errorIndex] -= errorTransition;
 
       return false;
 
