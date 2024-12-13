@@ -44,6 +44,7 @@ namespace Advent_Of_Code_2024 {
       Day11 d11 = new Day11();
       d11.Part1();
       d11.Part2();   */
+/*
       List<TimeSpan> runTimes = new List<TimeSpan>();
       DateTime start, end;
       start = DateTime.Now;
@@ -63,7 +64,11 @@ namespace Advent_Of_Code_2024 {
 
       Console.WriteLine("Formatting: {0}", runTimes[0]);
       Console.WriteLine("Part 1:     {0}", runTimes[1]);
-      Console.WriteLine("Part 2:     {0}", runTimes[2]);
+      Console.WriteLine("Part 2:     {0}", runTimes[2]);*/
+
+      Day13 d13 = new Day13();
+      d13.Part1();
+      d13.Part2();
     }
   }
 }
