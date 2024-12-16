@@ -64,11 +64,16 @@ namespace Advent_Of_Code_2024 {
 
       Console.WriteLine("Formatting: {0}", runTimes[0]);
       Console.WriteLine("Part 1:     {0}", runTimes[1]);
-      Console.WriteLine("Part 2:     {0}", runTimes[2]);*/
+      Console.WriteLine("Part 2:     {0}", runTimes[2]);
 
       Day13 d13 = new Day13();
       d13.Part1();
-      d13.Part2();
+      d13.Part2();*/
+
+      Day14 d14 = new Day14();
+      d14.Part1();
+
+      d14.Part2();
     }
   }
 }
