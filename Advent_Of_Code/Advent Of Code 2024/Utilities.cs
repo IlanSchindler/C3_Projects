@@ -11,7 +11,7 @@ namespace Advent_Of_Code_2024 {
     public enum directions {
       up = 0, left = 1, down = 2, right = 3
     }
-    public static Dictionary<directions, (int, int)> movements = new Dictionary<directions, (int, int)> {
+    public static Dictionary<directions, (int , int )> movements = new Dictionary<directions, (int, int)> {
       { directions.up , (-1,0) },
       { directions.left , (0,-1) },
       { directions.down , (1,0) },

@@ -43,8 +43,7 @@ namespace Advent_Of_Code_2024 {
 
       Day11 d11 = new Day11();
       d11.Part1();
-      d11.Part2();   */
-/*
+      d11.Part2();   
       List<TimeSpan> runTimes = new List<TimeSpan>();
       DateTime start, end;
       start = DateTime.Now;
@@ -68,12 +67,16 @@ namespace Advent_Of_Code_2024 {
 
       Day13 d13 = new Day13();
       d13.Part1();
-      d13.Part2();*/
+      d13.Part2(); 
 
       Day14 d14 = new Day14();
       d14.Part1();
 
-      d14.Part2();
+      d14.Part2();*/
+
+      Day15 d15 = new Day15();
+      d15.Part1();
+      d15.Part2();
     }
   }
 }
