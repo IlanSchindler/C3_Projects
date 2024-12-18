@@ -1,4 +1,6 @@
 ﻿using Advent_Of_Code_2024.Day_Solutions;
+using System.Data;
+using System.Security.AccessControl;
 
 namespace Advent_Of_Code_2024 {
   internal class Program {
@@ -9,11 +11,11 @@ namespace Advent_Of_Code_2024 {
       d2.Part2();
 
 
-      
+
       Day4 d4 = new Day4();
       d4.Part1();
       d4.Part2();
-       
+
 
 
       Day5 d5 = new Day5();
@@ -27,7 +29,7 @@ namespace Advent_Of_Code_2024 {
       Day7 d7 = new Day7();
       d7.Part1();
       d7.Part2();
-      
+
 
       Day8 d8 = new Day8();
       d8.Part1();
@@ -50,7 +52,7 @@ namespace Advent_Of_Code_2024 {
       Day12 d12 = new Day12();
       end = DateTime.Now;
       runTimes.Add(end - start);
-      
+
       start = DateTime.Now;
       d12.Part1();                     
       end = DateTime.Now;
@@ -73,10 +75,15 @@ namespace Advent_Of_Code_2024 {
       d14.Part1();
 
       d14.Part2();*/
-
+      /*
       Day15 d15 = new Day15();
       d15.Part1();
-      d15.Part2();
+      d15.Part2();*/
+      Console.CursorVisible = false;
+      Day16 d16 = new Day16();
+      d16.Part1();
+
+
     }
   }
 }

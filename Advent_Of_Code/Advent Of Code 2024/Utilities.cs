@@ -8,16 +8,66 @@ using System.Threading.Tasks;
 namespace Advent_Of_Code_2024 {
   internal static class Utilities {
     public static string InputPath { get { return @"D:\C3\Advent_Of_Code\Advent Of Code 2024\Inputs\"; } }
-    public enum directions {
-      up = 0, left = 1, down = 2, right = 3
+
+    public static List<T> AddReturn<T>(this List<T> collection, T item) {
+      collection.Add(item);
+      return collection;
     }
-    public static Dictionary<directions, (int , int )> movements = new Dictionary<directions, (int, int)> {
+    public enum directions {
+      up = 0, 
+      left = 1, 
+      down = 2, 
+      right = 3
+    }
+
+    public static directions Opposite(this directions dir) {
+      switch(dir) {
+        case directions.up:
+          return directions.down;
+        case directions.down:
+          return directions.up;
+        case directions.left:
+          return directions.right;
+        case directions.right:
+          return directions.left;
+      }
+      throw new NotImplementedException();
+    }
+
+    public static directions Left(this directions dir) {
+      switch(dir) {
+        case directions.up:
+          return directions.left;
+        case directions.down:
+          return directions.right;
+        case directions.left:
+          return directions.down;
+        case directions.right:
+          return directions.up;
+      }
+      throw new NotImplementedException();
+    }
+
+    public static directions Right(this directions dir) {
+      switch(dir) {
+        case directions.up:
+          return directions.right;
+        case directions.down:
+          return directions.left;
+        case directions.left:
+          return directions.up;
+        case directions.right:
+          return directions.down;
+      }
+      throw new NotImplementedException();
+    }
+
+    public static Dictionary<directions, (int dy, int dx)> movements = new Dictionary<directions, (int, int)> {
       { directions.up , (-1,0) },
       { directions.left , (0,-1) },
       { directions.down , (1,0) },
       { directions.right , (0,1) }
     };
-
     public static List<string> readInputFile(string input_file) {
       return readInputFromPath(InputPath + input_file);
     }
