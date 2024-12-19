@@ -82,6 +82,7 @@ namespace Advent_Of_Code_2024 {
       Console.CursorVisible = false;
       Day16 d16 = new Day16();
       d16.Part1();
+      d16.Part2();
 
 
     }
