@@ -8,23 +8,13 @@ using System.Threading.Tasks;
 namespace Advent_Of_Code_2024.Day_Solutions {
   internal class Day16 : Day {
 
-    class Tile {
-      public (int x, int y) Pos { get; set; }
-      public Dictionary<Utilities.directions, Tile> Neighbors = new Dictionary<Utilities.directions, Tile> {
-        {Utilities.directions.up,null },
-        {Utilities.directions.down,null },
-        {Utilities.directions.left,null },
-        {Utilities.directions.right,null }
-      };
-      public bool IsStart { get; set; }
-      public bool IsEnd { get; set; }
+    class TileD16 : Utilities.Tile {
+     
+      public List<TileD16> BestLastNeighbors { get; set; }
 
-
-      public List<Tile> BestLastNeighbors { get; set; }
-
-      public List<Tile> BuildBestLastPath() {
+      public List<TileD16> BuildBestLastPath() {
         if(this.IsStart)
-          return new List<Tile>() { this };
+          return new List<TileD16>() { this };
         return this.BestLastNeighbors[0].BuildBestLastPath().AddReturn(this);
       }
 
@@ -33,7 +23,7 @@ namespace Advent_Of_Code_2024.Day_Solutions {
 
 
 
-    List<Tile> maze;
+    List<TileD16> maze;
 
 
     public Day16() : base("Day16.txt") {
@@ -42,13 +32,13 @@ namespace Advent_Of_Code_2024.Day_Solutions {
 
     public override void FormatData() {
       var input = Utilities.readInputFile(inputFile);
-      maze = new List<Tile>();
+      maze = new List<TileD16>();
       //Load all squares into maze. Don't save any walls.
       for(int i = 0; i < input.Count; i++) {
         for(int j = 0; j < input[0].Length; j++) {
           if(input[i][j] == '#')
             continue;
-          var newPath = new Tile() { Pos = (j, i) };
+          var newPath = new TileD16() { Pos = (j, i) };
           if(input[i][j] == 'E')
             newPath.IsEnd = true;
           if(input[i][j] == 'S')
@@ -81,17 +71,17 @@ namespace Advent_Of_Code_2024.Day_Solutions {
     public override void Part1() {
 
 
-      List<Tile> nextChecks = new List<Tile> { maze.First(x => x.IsStart) };
+      List<TileD16> nextChecks = new List<TileD16> { maze.First(x => x.IsStart) };
       while(nextChecks.Count > 0) {
 
 
         int checkCount = nextChecks.Count;
         for(int i = 0; i < checkCount; i++) {
 
-          foreach(var neighbor in nextChecks[i].Neighbors.Values.Where(x => x != null).ToList()) {
+          foreach(TileD16 neighbor in nextChecks[i].Neighbors.Values.Where(x => x != null).ToList()) {
 
             if(neighbor.BestLastNeighbors == null) {
-              neighbor.BestLastNeighbors = new List<Tile>() { nextChecks[i] };
+              neighbor.BestLastNeighbors = new List<TileD16>() { nextChecks[i] };
               nextChecks.Add(neighbor);
             } else if(neighbor.BestLastNeighbors.Contains(nextChecks[i]) || nextChecks[i].BestLastNeighbors.Contains(neighbor)) {
               continue;
@@ -107,7 +97,7 @@ namespace Advent_Of_Code_2024.Day_Solutions {
                 if(Math.Abs(curBestScore - testScore) == 1000) {
                   var nextNeighbors = neighbor.Neighbors.Values.Where(x => x != null && !curBestPath.Contains(x) && !testPath.Contains(x)).ToList();
                   
-                  if(nextNeighbors.Any(x => getPathScore(curBestPath.ToList().AddReturn(x)) == getPathScore(testPath.ToList().AddReturn(x)))) {
+                  if(nextNeighbors.Any(x => getPathScore(curBestPath.ToList().AddReturn(x as TileD16)) == getPathScore(testPath.ToList().AddReturn(x as TileD16)))) {
                     neighbor.BestLastNeighbors.Add(nextChecks[i]);
                     continue;
                   }
@@ -126,8 +116,8 @@ namespace Advent_Of_Code_2024.Day_Solutions {
       }
       
             drawMaze();
-      var allPaths = new List<List<Tile>>();
-      findAllPaths(new List<Tile>(), maze.First(x => x.IsEnd), allPaths);
+      var allPaths = new List<List<TileD16>>();
+      findAllPaths(new List<TileD16>(), maze.First(x => x.IsEnd), allPaths);
       int bestScore = allPaths.Select(x => getPathScore(x)).Min();
       var bestPaths = allPaths.Where(x => getPathScore(x) == bestScore).ToList();
       foreach(var p in bestPaths) {
@@ -142,7 +132,7 @@ namespace Advent_Of_Code_2024.Day_Solutions {
     }
 
 
-    private void findAllPaths(List<Tile> path, Tile nextNode, List<List<Tile>> paths) {
+    private void findAllPaths(List<TileD16> path, TileD16 nextNode, List<List<TileD16>> paths) {
       path.Add(nextNode);
       if(nextNode.IsStart) {
         paths.Add(path.ToList());
@@ -178,7 +168,7 @@ namespace Advent_Of_Code_2024.Day_Solutions {
       }
     }
 
-    private int getPathScore(List<Tile> path, bool ignoreFirstTurn = false) {
+    private int getPathScore(List<TileD16> path, bool ignoreFirstTurn = false) {
       int turncount = 0;
       if(path[0].IsEnd || path[path.Count - 1].IsStart) {
         path.Reverse();
@@ -194,7 +184,7 @@ namespace Advent_Of_Code_2024.Day_Solutions {
 
 
 
-    private void drawPath(List<Tile> path, char c = 'X') {
+    private void drawPath(List<TileD16> path, char c = 'X') {
       foreach(var n in path) {
         Console.SetCursorPosition(n.Pos.x, n.Pos.y);
         Console.Write("" + c);

@@ -7,6 +7,22 @@ using System.Threading.Tasks;
 
 namespace Advent_Of_Code_2024 {
   internal static class Utilities {
+
+    public class Tile {
+      public (int x, int y) Pos { get; set; }
+      public Dictionary<Utilities.directions, Tile> Neighbors = new Dictionary<Utilities.directions, Tile> {
+        {Utilities.directions.up,null },
+        {Utilities.directions.down,null },
+        {Utilities.directions.left,null },
+        {Utilities.directions.right,null }
+      };
+      public bool IsStart { get; set; }
+      public bool IsEnd { get; set; }
+
+
+    }
+
+
     public static string InputPath { get { return @"D:\C3\Advent_Of_Code\Advent Of Code 2024\Inputs\"; } }
 
     public static List<T> AddReturn<T>(this List<T> collection, T item) {
@@ -14,9 +30,9 @@ namespace Advent_Of_Code_2024 {
       return collection;
     }
     public enum directions {
-      up = 0, 
-      left = 1, 
-      down = 2, 
+      up = 0,
+      left = 1,
+      down = 2,
       right = 3
     }
 
