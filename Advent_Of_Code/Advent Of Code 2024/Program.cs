@@ -78,11 +78,15 @@ namespace Advent_Of_Code_2024 {
       /*
       Day15 d15 = new Day15();
       d15.Part1();
-      d15.Part2();*/
+      d15.Part2();
       Console.CursorVisible = false;
       Day16 d16 = new Day16();
       d16.Part1();
-      d16.Part2();
+      d16.Part2();*/
+
+      Day17 d17 = new Day17();
+      d17.Part1();
+      d17.Part2();
 
 
     }
