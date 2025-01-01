@@ -101,9 +101,13 @@ namespace Advent_Of_Code_2024 {
       d19.Part2();
         */
 
-      Day20 d20 = new Day20();
+      /*Day20 d20 = new Day20();
       d20.Part1();
-      d20.Part2();
+      d20.Part2();*/
+
+      Day21 d21 = new Day21();
+      d21.Part1();
+      d21.Part2();
     }
   }
 }
