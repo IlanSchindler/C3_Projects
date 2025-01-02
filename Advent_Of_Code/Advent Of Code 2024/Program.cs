@@ -108,10 +108,14 @@ namespace Advent_Of_Code_2024 {
       /*Day21 d21 = new Day21();
       d21.Part1();
       d21.Part2();*/
+      /*
+            Day22 d22 = new Day22();
+            d22.Part1();
+            d22.Part2();*/
 
-      Day22 d22 = new Day22();
-      d22.Part1();
-      d22.Part2();
+      Day23 d23 = new Day23();
+      d23.Part1();
+      d23.Part2();
     }
   }
 }
