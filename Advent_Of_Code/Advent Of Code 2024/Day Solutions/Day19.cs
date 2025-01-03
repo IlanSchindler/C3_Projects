@@ -34,11 +34,15 @@ namespace Advent_Of_Code_2024.Day_Solutions {
 
     public override void Part2() {
       long totalFoundPatterns = 0;
-      string regexString = buildRegex(availablePatterns);
+      //string regexString = buildRegex(availablePatterns);
       //Dictionary<string, List<List<string>>> why = new Dictionary<string, List<List<string>>>();
-      Stack<string> BuiltStrings = new Stack<string>();
+      //Stack<string> BuiltStrings = new Stack<string>();
+      //availablePatterns.
       foreach(string pattern in targetPatterns) {
-        BuiltStrings.Clear();
+        long ways = countWays(pattern, availablePatterns, new Dictionary<string, long>());
+        totalFoundPatterns += ways;
+        continue;     
+        /* BuiltStrings.Clear();
         BuiltStrings.Push(pattern);
         var usablePatterns = availablePatterns.Where(x => Regex.IsMatch(pattern, x)).ToList();
         while(BuiltStrings.Count > 0) {
@@ -53,7 +57,7 @@ namespace Advent_Of_Code_2024.Day_Solutions {
           foreach(var p in usablePatterns.Where(x => curPattern.IndexOf(x) == 0)) {
             BuiltStrings.Push(curPattern.Remove(0,p.Length));          
           }
-        }
+        }*/
         /*why.Add(pattern, new List<List<string>> { new List<string> { pattern} });
         while(why[pattern].Any(x => x[0].Length > 0)) { 
           int patternCount = why[pattern].Count;
@@ -74,6 +78,18 @@ namespace Advent_Of_Code_2024.Day_Solutions {
         }*/
       }
       Console.WriteLine("Possible Combinations: {0}", totalFoundPatterns);
+    }
+
+    long countWays(string design, List<string> patterns, Dictionary<string, long> cache) {
+      if(cache.ContainsKey(design))
+        return cache[design];
+      if(design.Length == 0)
+        return 1;
+
+      long count = patterns.Where(x => design.StartsWith(x)).Aggregate((long)0, (x, y) => x + countWays(design.Substring(y.Length), patterns, cache));
+      cache.TryAdd(design, count);
+      cache[design] = count;
+      return count; 
     }
   }
 }
