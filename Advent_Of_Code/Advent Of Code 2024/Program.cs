@@ -116,10 +116,13 @@ namespace Advent_Of_Code_2024 {
       /*Day23 d23 = new Day23();
       d23.Part1();
       d23.Part2();*/
+      /*
+            Day24 d24 = new Day24();
+            d24.Part1();
+            d24.Part2();*/
 
-      Day24 d24 = new Day24();
-      d24.Part1();
-      d24.Part2();
+      Day25 d25 = new Day25();
+      d25.Part1();
     }
   }
 }
